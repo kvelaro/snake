@@ -3,6 +3,7 @@ import GameObject from "./GameObject";
 import Snake from "./Snake";
 import Level from "./Level";
 import Level1 from "./Levels/Level1";
+import EatableBrick from "./EatableBrick";
 
 const STATE_PLAYING = 'PLAYING'
 const STATE_OVER = 'OVER'
@@ -68,6 +69,15 @@ export default class Game {
 
     private play(): void {
         this.context().clearRect(0 ,0, this.width, this.height)
+
+        let filter = this.objects.filter(function(object) {
+            return object instanceof EatableBrick
+        })
+
+        if(filter.length == 0) {
+            this.objects.push(new EatableBrick(this, Math.floor(Math.random() * this.w()), Math.floor(Math.random() * this.h())))
+        }
+
         this.objects.forEach(function(object) {
             object.draw()
             object.update()
