@@ -28,6 +28,9 @@ export default class InputHandler {
                     snakeObj.xDirection = 1
                     snakeObj.yDirection = 0
                     break
+                case 'Escape':
+                    self.game.togglePlayPause()
+                    break
             }
         })
     }

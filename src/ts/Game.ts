@@ -6,6 +6,7 @@ import Level1 from "./Levels/Level1";
 import EatableBrick from "./EatableBrick";
 
 const STATE_PLAYING = 'PLAYING'
+const STATE_PAUSED = 'PAUSED'
 const STATE_OVER = 'OVER'
 
 export default class Game {
@@ -75,7 +76,11 @@ export default class Game {
         })
 
         if(filter.length == 0) {
-            this.objects.push(new EatableBrick(this, Math.floor(Math.random() * this.w()), Math.floor(Math.random() * this.h())))
+            let x = Math.floor(Math.random() * this.w())
+            let y = Math.floor(Math.random() * this.h())
+            x = x + (50 - x % 50)
+            y = y + (50 - y % 50)
+            this.objects.push(new EatableBrick(this, x, y))
         }
 
         this.objects.forEach(function(object) {
@@ -100,6 +105,15 @@ export default class Game {
 
     public currentState(): string {
         return this.state
+    }
+
+    public togglePlayPause(): void {
+        if(this.state == STATE_PLAYING) {
+            this.state = STATE_PAUSED
+        }
+        else {
+            this.state = STATE_PLAYING
+        }
     }
 
 }
