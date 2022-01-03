@@ -71,6 +71,15 @@ export default class Game {
     private play(): void {
         this.context().clearRect(0 ,0, this.width, this.height)
 
+        this.eatableBrick()
+
+        this.objects.forEach(function(object) {
+            object.draw()
+            object.update()
+        })
+    }
+
+    public eatableBrick(): void {
         let filter = this.objects.filter(function(object) {
             return object instanceof EatableBrick
         })
@@ -82,11 +91,6 @@ export default class Game {
             y = y + (50 - y % 50)
             this.objects.push(new EatableBrick(this, x, y))
         }
-
-        this.objects.forEach(function(object) {
-            object.draw()
-            object.update()
-        })
     }
 
     public over(): void {

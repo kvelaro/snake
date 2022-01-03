@@ -11,22 +11,23 @@ export default class InputHandler {
             let tmp = self.game.objects.filter(function(object) { return object instanceof Snake })
             let snakeObj = <Snake>tmp.pop()
             snakeObj.currentSpeed = snakeObj.speed
+            snakeObj.turnPending = true
             switch (e.code) {
                 case 'ArrowUp':
-                    snakeObj.xDirection = 0
-                    snakeObj.yDirection = -1
+                    snakeObj.xRequestedDirection = 0
+                    snakeObj.yRequestedDirection = -1
                     break
                 case 'ArrowDown':
-                    snakeObj.xDirection = 0
-                    snakeObj.yDirection = 1
+                    snakeObj.xRequestedDirection = 0
+                    snakeObj.yRequestedDirection = 1
                     break
                 case 'ArrowLeft':
-                    snakeObj.xDirection = -1
-                    snakeObj.yDirection = 0
+                    snakeObj.xRequestedDirection = -1
+                    snakeObj.yRequestedDirection = 0
                     break
                 case 'ArrowRight':
-                    snakeObj.xDirection = 1
-                    snakeObj.yDirection = 0
+                    snakeObj.xRequestedDirection = 1
+                    snakeObj.yRequestedDirection = 0
                     break
                 case 'Escape':
                     self.game.togglePlayPause()
