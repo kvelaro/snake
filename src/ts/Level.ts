@@ -1,14 +1,12 @@
-import Wave from "./interfaces/Wave";
-
 export default class Level {
-    protected waves: Array<Wave>
-    protected currentWave: number
+    protected speed: number
+    protected bricks: number
 
-    public next(): object {
-        return this.waves[this.currentWave++]
+    public getSpeed():number {
+        return this.speed
     }
 
-    public current(): number {
-        return this.currentWave
+    public getBricks(): number {
+        return this.bricks
     }
 }

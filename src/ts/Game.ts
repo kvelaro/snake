@@ -1,5 +1,8 @@
 import InputHandler from "./InputHandler";
 import GameObject from "./GameObject";
+import Snake from "./Snake";
+import Level from "./Level";
+import Level1 from "./Levels/Level1";
 
 const STATE_PLAYING = 'PLAYING'
 const STATE_OVER = 'OVER'
@@ -12,6 +15,7 @@ export default class Game {
     public objects: Array<GameObject>
     private frame: number
     private state: string
+    public level: Level
 
     constructor(gameScreen: HTMLCanvasElement, width: number, height: number) {
         this.gameCanvasElement = gameScreen
@@ -46,6 +50,11 @@ export default class Game {
 
     public start(): void {
         this.state = STATE_PLAYING
+
+        new InputHandler(this)
+
+        this.level = new Level1()
+        this.objects.push(new Snake(this, 0 ,0))
     }
 
     public loop(): void {
